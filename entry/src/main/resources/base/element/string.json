@@ -1,0 +1,7 @@
+{
+  "string": [
+    { "name": "app_name", "value": "旅见 AI" },
+    { "name": "module_desc", "value": "AI+旅游行程助手课程项目" },
+    { "name": "entry_desc", "value": "旅见 AI 入口" }
+  ]
+}
