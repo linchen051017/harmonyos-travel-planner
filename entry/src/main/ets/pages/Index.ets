@@ -131,6 +131,10 @@ struct TripDetailPage {
     if (this.loading) { return; }
     this.loading = true;
     this.errorText = '';
+    this.currentTemp = '—';
+    this.weatherText = '等待更新';
+    this.updateTime = '';
+    this.forecast = [];
     const city = this.route.city;
     const url = 'https://api.open-meteo.com/v1/forecast?latitude=' + city.latitude.toString() +
       '&longitude=' + city.longitude.toString() +
@@ -149,7 +153,6 @@ struct TripDetailPage {
       if (!data.current || !data.daily || !data.daily.time ||
           !data.daily.temperature_2m_max || !data.daily.temperature_2m_min ||
           !data.daily.precipitation_probability_max || data.daily.time.length === 0) {
-        this.forecast = [];
         this.errorText = '暂无可用天气数据，请稍后重试';
         return;
       }
@@ -170,6 +173,9 @@ struct TripDetailPage {
       this.forecast = next;
       if (next.length === 0) { this.errorText = '暂无可用天气数据，请稍后重试'; }
     } catch (error) {
+      this.currentTemp = '—';
+      this.weatherText = '等待更新';
+      this.updateTime = '';
       this.forecast = [];
       this.errorText = '天气加载失败，请检查网络后重试';
     } finally {
